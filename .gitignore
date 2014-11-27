@@ -18,4 +18,3 @@ _ReSharper*
 CI
 TestResult.xml
 *.local.xml
-.ncrunchproject

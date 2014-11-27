@@ -39,107 +39,89 @@
 
  * */
 
-using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp
 {
 	public partial class GildedRose
 	{
-	    private const int MaxQuality = 50;
-	    private const int MinQuality = 0;
-
-	    private const string Brie = "Aged Brie";
-	    private const string ConcertTicket = "Backstage passes to a TAFKAL80ETC concert";
-	    private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
-
-	    public void UpdateQuality()
+		public void UpdateQuality()
 		{
-		    foreach (var item in _innventory)
-		    {
-		        if (item.Name != Brie && item.Name != ConcertTicket)
-		        {
-		            if (item.Quality > MinQuality)
-		            {
-		                if (item.Name != Sulfuras)
-		                {
-		                    item.Quality--;
-		                }
-		            }
-		        }
-		        else
-		        {
-		            if (item.Quality < MaxQuality)
-		            {
-		                item.Quality++;
+			for(int i = 0; i < this._innventory.Count; i++)
+			{
+				if(this._innventory[i].Name != "Aged Brie" && this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+				{
+					if(this._innventory[i].Quality > 0)
+					{
+						if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
+						{
+							this._innventory[i].Quality = this._innventory[i].Quality - 1;
+						}
+					}
+				}
+				else
+				{
+					if(this._innventory[i].Quality < 50)
+					{
+						this._innventory[i].Quality = this._innventory[i].Quality + 1;
 
-		                if (item.Name == ConcertTicket)
-		                {
-		                    if (item.SellIn < 11)
-		                    {
-		                        if (item.Quality < MaxQuality)
-		                        {
-		                            item.Quality++;
-		                        }
-		                    }
+						if(this._innventory[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+						{
+							if(this._innventory[i].SellIn < 11)
+							{
+								if(this._innventory[i].Quality < 50)
+								{
+									this._innventory[i].Quality = this._innventory[i].Quality + 1;
+								}
+							}
 
-		                    if (item.SellIn < 6)
-		                    {
-		                        if (item.Quality < MaxQuality)
-		                        {
-		                            item.Quality++;
-		                        }
-		                    }
-		                }
-		            }
-		        }
+							if(this._innventory[i].SellIn < 6)
+							{
+								if(this._innventory[i].Quality < 50)
+								{
+									this._innventory[i].Quality = this._innventory[i].Quality + 1;
+								}
+							}
+						}
+					}
+				}
 
-		        if (item.Name != Sulfuras)
-		        {
-		            item.SellIn--;
-		        }
+				if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
+				{
+					this._innventory[i].SellIn = this._innventory[i].SellIn - 1;
+				}
 
-		        if (item.SellIn < 0)
-		        {
-		            if (item.Name != Brie)
-		            {
-		                if (item.Name != ConcertTicket)
-		                {
-		                    if (item.Quality > MinQuality)
-		                    {
-		                        if (item.Name != Sulfuras)
-		                        {
-		                            item.Quality--;
-		                        }
-		                    }
-		                }
-		                else
-		                {
-		                    item.Quality = MinQuality;
-		                }
-		            }
-		            else
-		            {
-		                if (item.Quality < MaxQuality)
-		                {
-		                    item.Quality++;
-		                }
-		            }
-		        }
-		    }
+				if(this._innventory[i].SellIn < 0)
+				{
+					if(this._innventory[i].Name != "Aged Brie")
+					{
+						if(this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+						{
+							if(this._innventory[i].Quality > 0)
+							{
+								if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
+								{
+									this._innventory[i].Quality = this._innventory[i].Quality - 1;
+								}
+							}
+						}
+						else
+						{
+							this._innventory[i].Quality = this._innventory[i].Quality - this._innventory[i].Quality;
+						}
+					}
+					else
+					{
+						if(this._innventory[i].Quality < 50)
+						{
+							this._innventory[i].Quality = this._innventory[i].Quality + 1;
+						}
+					}
+				}
+			}
 		}
 
-	    private void UpdateGeneralItem(Item item)
-	    {
-	        
-	    }
-
-	    public IList<Item> GetInventory()
-	    {
-	        return _innventory;
-	    }
-
-	    public void DumpDebugInfo(StringBuilder log)
+		public void DumpDebugInfo(StringBuilder log)
 		{
 			foreach(var item in _innventory)
 			{
