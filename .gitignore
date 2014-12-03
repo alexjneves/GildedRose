@@ -22,3 +22,5 @@ TestResult.xml
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
+*.ncrunchsolution
+*.ncrunchproject
