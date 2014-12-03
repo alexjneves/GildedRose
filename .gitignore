@@ -18,3 +18,7 @@ _ReSharper*
 CI
 TestResult.xml
 *.local.xml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
