@@ -39,6 +39,7 @@
 
  * */
 
+using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp
@@ -49,7 +50,7 @@ namespace ConsoleApp
 		{
 			for(int i = 0; i < this._innventory.Count; i++)
 			{
-				if(this._innventory[i].Name != "Aged Brie" && this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+				if(this._innventory[i].Name != "Aged Brie" && this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert") 
 				{
 					if(this._innventory[i].Quality > 0)
 					{
@@ -120,6 +121,11 @@ namespace ConsoleApp
 				}
 			}
 		}
+
+	    public IList<Item> GetInventory()
+	    {
+	        return _innventory;
+	    }
 
 		public void DumpDebugInfo(StringBuilder log)
 		{
