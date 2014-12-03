@@ -39,87 +39,195 @@
 
  * */
 
+using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp
 {
 	public partial class GildedRose
 	{
-		public void UpdateQuality()
+	    private const string Brie = "Aged Brie";
+	    private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+	    private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+	    private const int MaxQuality = 50;
+
+	    public void UpdateQuality()
 		{
-			for(int i = 0; i < this._innventory.Count; i++)
-			{
-				if(this._innventory[i].Name != "Aged Brie" && this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-				{
-					if(this._innventory[i].Quality > 0)
-					{
-						if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
-						{
-							this._innventory[i].Quality = this._innventory[i].Quality - 1;
-						}
-					}
-				}
-				else
-				{
-					if(this._innventory[i].Quality < 50)
-					{
-						this._innventory[i].Quality = this._innventory[i].Quality + 1;
+            foreach (var item in _innventory)
+            {
+                var itemType = item.Name;
 
-						if(this._innventory[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-						{
-							if(this._innventory[i].SellIn < 11)
-							{
-								if(this._innventory[i].Quality < 50)
-								{
-									this._innventory[i].Quality = this._innventory[i].Quality + 1;
-								}
-							}
+                switch (itemType)
+                {
+                    case Brie:
+                        UpdateBrie(item);
+                        break;
+                    case BackstagePasses:
+                        UpdateBackstagePass(item);
+                        break;
+                    case Sulfuras:
+                        break;
+                    case "Conjured Mana Cake":
+                        UpdateGeneralItem(item);
+                        break;
+                    default:
+                        UpdateGeneralItem(item);
+                        break;
+                }
+		        
+            }
 
-							if(this._innventory[i].SellIn < 6)
-							{
-								if(this._innventory[i].Quality < 50)
-								{
-									this._innventory[i].Quality = this._innventory[i].Quality + 1;
-								}
-							}
-						}
-					}
-				}
+                //if(item.Name != Brie && item.Name != BackstagePasses)
+                //{
+                //    if(item.Quality > 0)
+                //    {
+                //        if(item.Name != Sulfuras)
+                //        {
+                //            item.Quality = item.Quality - 1;
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    if(item.Quality < MaxQuality)
+                //    {
+                //        item.Quality++;
 
-				if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
-				{
-					this._innventory[i].SellIn = this._innventory[i].SellIn - 1;
-				}
+                //        if(item.Name == BackstagePasses)
+                //        {
+                //            if(item.SellIn < 11)
+                //            {
+                //                if(item.Quality < MaxQuality)
+                //                {
+                //                    item.Quality++;
+                //                }
+                //            }
 
-				if(this._innventory[i].SellIn < 0)
-				{
-					if(this._innventory[i].Name != "Aged Brie")
-					{
-						if(this._innventory[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-						{
-							if(this._innventory[i].Quality > 0)
-							{
-								if(this._innventory[i].Name != "Sulfuras, Hand of Ragnaros")
-								{
-									this._innventory[i].Quality = this._innventory[i].Quality - 1;
-								}
-							}
-						}
-						else
-						{
-							this._innventory[i].Quality = this._innventory[i].Quality - this._innventory[i].Quality;
-						}
-					}
-					else
-					{
-						if(this._innventory[i].Quality < 50)
-						{
-							this._innventory[i].Quality = this._innventory[i].Quality + 1;
-						}
-					}
-				}
-			}
-		}
+                //            if(item.SellIn < 6)
+                //            {
+                //                if(item.Quality < MaxQuality)
+                //                {
+                //                    item.Quality++;
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+
+                //if(item.Name != Sulfuras)
+                //{
+                //    item.SellIn--;
+                //}
+
+                //if(item.SellIn < 0)
+                //{
+                //    if(item.Name != Brie)
+                //    {
+                //        if(item.Name != BackstagePasses)
+                //        {
+                //            if(item.Quality > 0)
+                //            {
+                //                if(item.Name != Sulfuras)
+                //                {
+                //                    item.Quality--;
+                //                }
+                //            }
+                //        }
+                //        else
+                //        {
+                //            item.Quality = 0;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        if(item.Quality < MaxQuality)
+                //        {
+                //            item.Quality++;
+                //        }
+                //    }
+                //}
+            }
+
+	    private void UpdateConjuredManaCake(Item item)
+	    {
+            item.SellIn--;
+
+	        item.Quality -= 2;
+
+	        if (item.SellIn < 0)
+	        {
+	            item.Quality -= 2;
+	        }
+
+	        if (item.Quality < 0)
+	        {
+	            item.Quality = 0;
+	        }
+	    }
+
+	    public void UpdateGeneralItem(Item item)
+	    {
+            item.SellIn--;
+            item.Quality--;
+
+	        if (item.SellIn < 0)
+	        {
+	            item.Quality--;
+	        }
+
+	        if (item.Quality < 0)
+	        {
+	            item.Quality = 0;
+	        }
+	    }
+
+	    public void UpdateBrie(Item item)
+	    {
+            item.SellIn--;
+	        item.Quality++;
+
+	        if (item.SellIn < 0)
+	        {
+                item.Quality++;
+	        }
+
+	        if (item.Quality > MaxQuality)
+	        {
+	            item.Quality = MaxQuality;
+	        }
+	    }
+
+	    public void UpdateBackstagePass(Item item)
+	    {
+            item.SellIn--;
+            item.Quality++;
+
+	        if (item.SellIn < 0)
+	        {
+	            item.Quality = 0;
+	            return;
+	        }
+
+	        if (item.SellIn < 10)
+	        {
+	            item.Quality++;
+	        }
+
+	        if (item.SellIn < 5)
+	        {
+	            item.Quality++;
+	        }
+
+            if (item.Quality > MaxQuality)
+            {
+                item.Quality = MaxQuality;
+            }
+	    }
+
+	    public IList<Item> GetInventory()
+	    {
+	        return _innventory;
+	    }
 
 		public void DumpDebugInfo(StringBuilder log)
 		{
