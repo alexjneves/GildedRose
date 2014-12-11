@@ -10,28 +10,28 @@ After Iteration 1[19, 9] +5 Dexterity Vest should sell in 9 and has quality 19.
 [6, 4] Elixir of the Mongoose should sell in 4 and has quality 6.
 [80, 0] Sulfuras, Hand of Ragnaros should sell in 0 and has quality 80.
 [21, 14] Backstage passes to a TAFKAL80ETC concert should sell in 14 and has quality 21.
-[5, 2] Conjured Mana Cake should sell in 2 and has quality 5.
+[4, 2] Conjured Mana Cake should sell in 2 and has quality 4.
 
 After Iteration 2[18, 8] +5 Dexterity Vest should sell in 8 and has quality 18.
 [2, 0] Aged Brie should sell in 0 and has quality 2.
 [5, 3] Elixir of the Mongoose should sell in 3 and has quality 5.
 [80, 0] Sulfuras, Hand of Ragnaros should sell in 0 and has quality 80.
 [22, 13] Backstage passes to a TAFKAL80ETC concert should sell in 13 and has quality 22.
-[4, 1] Conjured Mana Cake should sell in 1 and has quality 4.
+[2, 1] Conjured Mana Cake should sell in 1 and has quality 2.
 
 After Iteration 3[17, 7] +5 Dexterity Vest should sell in 7 and has quality 17.
 [4, -1] Aged Brie should sell in -1 and has quality 4.
 [4, 2] Elixir of the Mongoose should sell in 2 and has quality 4.
 [80, 0] Sulfuras, Hand of Ragnaros should sell in 0 and has quality 80.
 [23, 12] Backstage passes to a TAFKAL80ETC concert should sell in 12 and has quality 23.
-[3, 0] Conjured Mana Cake should sell in 0 and has quality 3.
+[0, 0] Conjured Mana Cake should sell in 0 and has quality 0.
 
 After Iteration 4[16, 6] +5 Dexterity Vest should sell in 6 and has quality 16.
 [6, -2] Aged Brie should sell in -2 and has quality 6.
 [3, 1] Elixir of the Mongoose should sell in 1 and has quality 3.
 [80, 0] Sulfuras, Hand of Ragnaros should sell in 0 and has quality 80.
 [24, 11] Backstage passes to a TAFKAL80ETC concert should sell in 11 and has quality 24.
-[1, -1] Conjured Mana Cake should sell in -1 and has quality 1.
+[0, -1] Conjured Mana Cake should sell in -1 and has quality 0.
 
 After Iteration 5[15, 5] +5 Dexterity Vest should sell in 5 and has quality 15.
 [8, -3] Aged Brie should sell in -3 and has quality 8.

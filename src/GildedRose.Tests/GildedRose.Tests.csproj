@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgeTheInventory.cs" />
+    <Compile Include="ConjuredTests.cs" />
+    <Compile Include="ItemBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildVerificationTests.cs" />
   </ItemGroup>

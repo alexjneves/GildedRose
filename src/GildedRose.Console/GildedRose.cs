@@ -40,11 +40,12 @@
  * */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleApp
 {
-	public partial class GildedRose
+    public partial class GildedRose
 	{
 	    private const string Brie = "Aged Brie";
 	    private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
@@ -52,122 +53,47 @@ namespace ConsoleApp
 	    private const int MaxQuality = 50;
 
 	    public void UpdateQuality()
-		{
-            foreach (var item in _innventory)
-            {
-                var itemType = item.Name;
-
-                switch (itemType)
-                {
-                    case Brie:
-                        UpdateBrie(item);
-                        break;
-                    case BackstagePasses:
-                        UpdateBackstagePass(item);
-                        break;
-                    case Sulfuras:
-                        break;
-                    case "Conjured Mana Cake":
-                        UpdateGeneralItem(item);
-                        break;
-                    default:
-                        UpdateGeneralItem(item);
-                        break;
-                }
-		        
-            }
-
-                //if(item.Name != Brie && item.Name != BackstagePasses)
-                //{
-                //    if(item.Quality > 0)
-                //    {
-                //        if(item.Name != Sulfuras)
-                //        {
-                //            item.Quality = item.Quality - 1;
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    if(item.Quality < MaxQuality)
-                //    {
-                //        item.Quality++;
-
-                //        if(item.Name == BackstagePasses)
-                //        {
-                //            if(item.SellIn < 11)
-                //            {
-                //                if(item.Quality < MaxQuality)
-                //                {
-                //                    item.Quality++;
-                //                }
-                //            }
-
-                //            if(item.SellIn < 6)
-                //            {
-                //                if(item.Quality < MaxQuality)
-                //                {
-                //                    item.Quality++;
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
-
-                //if(item.Name != Sulfuras)
-                //{
-                //    item.SellIn--;
-                //}
-
-                //if(item.SellIn < 0)
-                //{
-                //    if(item.Name != Brie)
-                //    {
-                //        if(item.Name != BackstagePasses)
-                //        {
-                //            if(item.Quality > 0)
-                //            {
-                //                if(item.Name != Sulfuras)
-                //                {
-                //                    item.Quality--;
-                //                }
-                //            }
-                //        }
-                //        else
-                //        {
-                //            item.Quality = 0;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if(item.Quality < MaxQuality)
-                //        {
-                //            item.Quality++;
-                //        }
-                //    }
-                //}
-            }
-
-	    private void UpdateConjuredManaCake(Item item)
 	    {
-            item.SellIn--;
-
-	        item.Quality -= 2;
-
-	        if (item.SellIn < 0)
+	        foreach (var item in _innventory.Where(item => !item.Name.Contains(Sulfuras)))
 	        {
-	            item.Quality -= 2;
-	        }
+	            DecreaseSellIn(item);
+	            UpdateItem(item);
 
-	        if (item.Quality < 0)
-	        {
-	            item.Quality = 0;
+	            if (item.IsConjured())
+	            {
+	                UpdateItem(item);
+	            }
 	        }
 	    }
 
-	    public void UpdateGeneralItem(Item item)
+	    private static void UpdateItem(Item item)
 	    {
-            item.SellIn--;
+            var itemType = item.Name;
+
+	        itemType = itemType.Replace("Conjured", "");
+	        itemType = itemType.Trim();
+
+            switch (itemType)
+            {
+                case Brie:
+                    UpdateBrie(item);
+                    break;
+                case BackstagePasses:
+                    UpdateBackstagePass(item);
+                    break;
+                default:
+                    UpdateGeneralItem(item);
+                    break;
+            }
+	    }
+
+	    private static void DecreaseSellIn(Item item)
+	    {
+	        item.SellIn--;
+	    }
+
+        private static void UpdateGeneralItem(Item item)
+	    {
             item.Quality--;
 
 	        if (item.SellIn < 0)
@@ -181,9 +107,8 @@ namespace ConsoleApp
 	        }
 	    }
 
-	    public void UpdateBrie(Item item)
+	    private static void UpdateBrie(Item item)
 	    {
-            item.SellIn--;
 	        item.Quality++;
 
 	        if (item.SellIn < 0)
@@ -197,9 +122,8 @@ namespace ConsoleApp
 	        }
 	    }
 
-	    public void UpdateBackstagePass(Item item)
+	    private static void UpdateBackstagePass(Item item)
 	    {
-            item.SellIn--;
             item.Quality++;
 
 	        if (item.SellIn < 0)
